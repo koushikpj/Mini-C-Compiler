@@ -1,0 +1,23 @@
+THREE-ADDRESS CODE
+------------------
+y = 10.5
+list = alloc 10
+t1 = 3 * 2
+t2 = 5 + t1
+x = t2
+t3 = x > 10
+ifFalse t3 goto L1
+param x
+call print, 1
+goto L2
+L1:
+param y
+call print, 1
+L2:
+L3:
+t4 = x < 20
+ifFalse t4 goto L4
+t5 = x + 1
+x = t5
+goto L3
+L4:

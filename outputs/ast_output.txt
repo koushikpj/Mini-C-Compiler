@@ -1,0 +1,41 @@
+AST
+---
+Program
+├── stmt: VarDecl
+│   ├── type: int
+│   └── name: x
+├── stmt: VarDecl
+│   ├── type: float
+│   ├── name: y
+│   └── init: Literal [10.5] (float)
+├── stmt: ArrayDecl
+│   ├── type: int
+│   ├── name: list
+│   └── size: 10
+├── stmt: Assign
+│   ├── target: Location [x]
+│   └── value: BinOp [+]
+│       ├── left: Literal [5] (int)
+│       └── right: BinOp [*]
+│           ├── left: Literal [3] (int)
+│           └── right: Literal [2] (int)
+├── stmt: If
+│   ├── cond: BinOp [>]
+│   │   ├── left: Location [x]
+│   │   └── right: Literal [10] (int)
+│   ├── then: Block
+│   │   └── stmt: Print
+│   │       └── expr: Location [x]
+│   └── else: Block
+│       └── stmt: Print
+│           └── expr: Location [y]
+└── stmt: While
+    ├── cond: BinOp [<]
+    │   ├── left: Location [x]
+    │   └── right: Literal [20] (int)
+    └── body: Block
+        └── stmt: Assign
+            ├── target: Location [x]
+            └── value: BinOp [+]
+                ├── left: Location [x]
+                └── right: Literal [1] (int)

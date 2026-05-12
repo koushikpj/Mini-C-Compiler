@@ -1,0 +1,7 @@
+SYMBOL TABLE
+------------
+Name  Type   Scope   Kind   Size
+----  -----  ------  -----  ----
+x     int    global  var    -   
+y     float  global  var    -   
+list  int[]  global  array  10  

@@ -1,0 +1,134 @@
+TOKENS
+------
+1:1   INT            int
+1:5   IDENTIFIER     x
+1:6   SEMICOLON      ;
+2:1   FLOAT          float
+2:7   IDENTIFIER     y
+2:9   ASSIGN         =
+2:11  FLOAT_LITERAL  10.5
+2:15  SEMICOLON      ;
+3:1   INT            int
+3:5   IDENTIFIER     list
+3:9   LBRACKET       [
+3:10  INT_LITERAL    10
+3:12  RBRACKET       ]
+3:13  SEMICOLON      ;
+5:1   IDENTIFIER     x
+5:3   ASSIGN         =
+5:5   INT_LITERAL    5
+5:7   PLUS           +
+5:9   INT_LITERAL    3
+5:11  STAR           *
+5:13  INT_LITERAL    2
+5:14  SEMICOLON      ;
+7:1   IF             if
+7:4   LPAREN         (
+7:5   IDENTIFIER     x
+7:7   GT             >
+7:9   INT_LITERAL    10
+7:11  RPAREN         )
+7:13  LBRACE         {
+8:5   PRINT          print
+8:10  LPAREN         (
+8:11  IDENTIFIER     x
+8:12  RPAREN         )
+8:13  SEMICOLON      ;
+9:1   RBRACE         }
+9:3   ELSE           else
+9:8   LBRACE         {
+10:5   PRINT          print
+10:10  LPAREN         (
+10:11  IDENTIFIER     y
+10:12  RPAREN         )
+10:13  SEMICOLON      ;
+11:1   RBRACE         }
+13:1   WHILE          while
+13:7   LPAREN         (
+13:8   IDENTIFIER     x
+13:10  LT             <
+13:12  INT_LITERAL    20
+13:14  RPAREN         )
+13:16  LBRACE         {
+14:5   IDENTIFIER     x
+14:7   ASSIGN         =
+14:9   IDENTIFIER     x
+14:11  PLUS           +
+14:13  INT_LITERAL    1
+14:14  SEMICOLON      ;
+15:1   RBRACE         }
+17:1   EOF            
+
+AST
+---
+Program
+├── stmt: VarDecl
+│   ├── type: int
+│   └── name: x
+├── stmt: VarDecl
+│   ├── type: float
+│   ├── name: y
+│   └── init: Literal [10.5] (float)
+├── stmt: ArrayDecl
+│   ├── type: int
+│   ├── name: list
+│   └── size: 10
+├── stmt: Assign
+│   ├── target: Location [x]
+│   └── value: BinOp [+]
+│       ├── left: Literal [5] (int)
+│       └── right: BinOp [*]
+│           ├── left: Literal [3] (int)
+│           └── right: Literal [2] (int)
+├── stmt: If
+│   ├── cond: BinOp [>]
+│   │   ├── left: Location [x]
+│   │   └── right: Literal [10] (int)
+│   ├── then: Block
+│   │   └── stmt: Print
+│   │       └── expr: Location [x]
+│   └── else: Block
+│       └── stmt: Print
+│           └── expr: Location [y]
+└── stmt: While
+    ├── cond: BinOp [<]
+    │   ├── left: Location [x]
+    │   └── right: Literal [20] (int)
+    └── body: Block
+        └── stmt: Assign
+            ├── target: Location [x]
+            └── value: BinOp [+]
+                ├── left: Location [x]
+                └── right: Literal [1] (int)
+
+SYMBOL TABLE
+------------
+Name  Type   Scope   Kind   Size
+----  -----  ------  -----  ----
+x     int    global  var    -   
+y     float  global  var    -   
+list  int[]  global  array  10  
+
+THREE-ADDRESS CODE
+------------------
+y = 10.5
+list = alloc 10
+t1 = 3 * 2
+t2 = 5 + t1
+x = t2
+t3 = x > 10
+ifFalse t3 goto L1
+param x
+call print, 1
+goto L2
+L1:
+param y
+call print, 1
+L2:
+L3:
+t4 = x < 20
+ifFalse t4 goto L4
+t5 = x + 1
+x = t5
+goto L3
+L4:

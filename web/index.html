@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini-C Compiler</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="topbar">
+        <div>
+          <h1>Mini-C Compiler</h1>
+          <p>Lexer, parser, semantic analyzer, symbol table, and TAC generator</p>
+        </div>
+        <div class="status" id="status">Ready</div>
+      </section>
+
+      <section class="workspace">
+        <div class="pane editor-pane">
+          <div class="pane-header">
+            <h2>Source</h2>
+            <div class="button-row">
+              <button type="button" id="loadValid">Valid</button>
+              <button type="button" id="loadSemantic">Semantic Error</button>
+              <button type="button" id="loadLexical">Lexical Error</button>
+            </div>
+          </div>
+          <textarea id="source" spellcheck="false"></textarea>
+        </div>
+
+        <div class="pane output-pane">
+          <div class="pane-header">
+            <h2>Output</h2>
+            <div class="stage-tabs" role="tablist" aria-label="Compiler stages">
+              <button type="button" class="stage" data-stage="output">Output</button>
+              <button type="button" class="stage active" data-stage="all">All</button>
+              <button type="button" class="stage" data-stage="tokens">Tokens</button>
+              <button type="button" class="stage" data-stage="ast">AST</button>
+              <button type="button" class="stage" data-stage="symbols">Symbols</button>
+              <button type="button" class="stage" data-stage="tac">TAC</button>
+            </div>
+          </div>
+          <pre id="output">Click Run to compile the current Mini-C program.</pre>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button type="button" class="primary" id="run">Run</button>
+        <button type="button" id="clearOutput">Clear Output</button>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
+
