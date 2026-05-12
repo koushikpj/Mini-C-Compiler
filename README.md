@@ -1,6 +1,7 @@
 # Mini-C Compiler 🚀
 
-A complete multi-stage compiler for a subset of the C programming language, built as a group project at **Ramaiah University of Applied Sciences**.
+A complete multi-stage compiler for a subset of the C programming language, built as a group project at **Ramaiah University of Applied Sciences**.  
+👉 [GitHub Repository Link](https://github.com/koushikpj/Mini-C-Compiler)
 
 ## 👨‍💻 Team Members
 - Koushik PJ  – 23ETCS002062  
